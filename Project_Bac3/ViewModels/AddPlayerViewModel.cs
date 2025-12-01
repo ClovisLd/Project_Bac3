@@ -15,7 +15,7 @@ namespace Project_Bac3.ViewModels
 
 
         [ObservableProperty]
-        private string age = string.Empty; 
+        private int age = 0; 
 
 
         [ObservableProperty]
@@ -36,7 +36,7 @@ namespace Project_Bac3.ViewModels
             var player = new Player
             {
                 Name = Name,
-                Age = int.TryParse(Age, out int ageValue) ? ageValue : 0,
+                Age = Age,
                 Contact = Contact,
                 Description = Description,
                 EloRating = EloRating
@@ -46,7 +46,7 @@ namespace Project_Bac3.ViewModels
             // TODO: Add player to list or save
             // Clear form
             Name = string.Empty;
-            Age = string.Empty;
+            Age = 0;
             Contact = string.Empty;
             Description = string.Empty;
             EloRating = 400;
