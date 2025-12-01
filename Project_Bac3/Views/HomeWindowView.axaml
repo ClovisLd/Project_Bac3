@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Project_Bac3.ViewModels"
+             x:Class="Project_Bac3.Views.HomeWindowView"
+             x:DataType="vm:HomeWindowViewModel">
+    
+    <ListBox ItemsSource="{Binding Players}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                    <TextBlock Text="{Binding EloRating}" />
+                    
+                </StackPanel>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+    
+</UserControl>

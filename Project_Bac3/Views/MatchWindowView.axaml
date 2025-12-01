@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Project_Bac3.ViewModels"
+             x:Class="Project_Bac3.Views.MatchWindowView"
+             x:DataType="vm:MatchWindowViewModel">
+    
+    <TextBlock Text="{Binding Test}" />
+
+    
+</UserControl>

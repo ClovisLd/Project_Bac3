@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Project_Bac3.ViewModels"
+             x:Class="Project_Bac3.Views.AddPlayerWindowView"
+             x:DataType="vm:AddPlayerWindowViewModel">
+    
+     <StackPanel Margin="20" Spacing="10">
+        
+        <TextBlock Text="Add New Player" FontSize="20" FontWeight="Bold" />
+        
+        <TextBlock Text="Name:" />
+        <TextBox Text="{Binding Name}" Watermark="Enter name..." />
+        
+        <TextBlock Text="Age:" />
+        <NumericUpDown Value="{Binding Age}"
+                       Minimum="0" 
+                       Maximum="120" />
+        
+        <TextBlock Text="Contact:" />
+        <TextBox Text="{Binding Contact}" Watermark="Enter contact..." />
+        
+        <TextBlock Text="Description:" />
+        <TextBox Text="{Binding Description}"
+                 Height="80" 
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 Watermark="Enter description..." />
+        
+        <TextBlock Text="Elo Rating:" />
+        <NumericUpDown Value="{Binding EloRating}" 
+                       Minimum="0" 
+                       Maximum="3000" />
+        
+        <Button Content="Add Player" Command="{Binding AddPlayerCommand}" />
+        
+    </StackPanel>
+    
+</UserControl>

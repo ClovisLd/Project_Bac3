@@ -24,5 +24,14 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/Clovis Pc/Documents/C\#/Project_Bac3/Project_Bac3/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/Clovis Pc/Documents/C\#/Project_Bac3/Project_Bac3/Views/AddPlayerWindowView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/Clovis Pc/Documents/C\#/Project_Bac3/Project_Bac3/Views/HomeWindowView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/Clovis Pc/Documents/C\#/Project_Bac3/Project_Bac3/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/Clovis Pc/Documents/C\#/Project_Bac3/Project_Bac3/Views/MatchWindowView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

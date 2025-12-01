@@ -1,6 +1,37 @@
-﻿namespace Project_Bac3.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
-public partial class MainWindowViewModel : ViewModelBase
+namespace Project_Bac3.ViewModels
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    public partial class MainWindowViewModel : ObservableObject
+    {
+        [ObservableProperty]
+        private object? currentViewModel;
+
+        public MainWindowViewModel()
+        {
+            // Set initial view
+            CurrentViewModel = new HomeWindowViewModel();
+        }
+
+        [RelayCommand]
+        private void NavigateToHome()
+        {
+            CurrentViewModel = new HomeWindowViewModel();
+        }
+
+        [RelayCommand]
+        private void NavigateToAddPLayer()
+        {
+            CurrentViewModel = new AddPlayerWindowViewModel();
+        }
+
+        [RelayCommand]
+        private void NavigateToMatch()
+        {
+            CurrentViewModel = new MatchWindowViewModel();
+        }
+        
+        public string Greeting { get; } = "Welcome to Avalonia!";
+    }
 }

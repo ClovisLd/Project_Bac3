@@ -4,4 +4,5 @@ namespace Project_Bac3.ViewModels;
 
 public class ViewModelBase : ObservableObject
 {
+    
 }

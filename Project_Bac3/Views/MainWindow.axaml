@@ -15,6 +15,41 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid ColumnDefinitions="200,*">
+        
+        <!-- Fixed Sidebar (Left) -->
+    <StackPanel Grid.Column="0" Background="#2C3E50" 
+                HorizontalAlignment="Stretch">
+        <Button Command="{Binding NavigateToHomeCommand}"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Padding="20,10"
+                FontSize="16">
+            Home
+        </Button>
 
+        <Button Command="{Binding NavigateToAddPLayerCommand}"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Padding="20,10"
+                FontSize="16">
+            Add Player
+        </Button>
+
+        <Button Command="{Binding NavigateToMatchCommand}"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Padding="20,10"
+                FontSize="16">
+            Match
+        </Button>
+        
+    </StackPanel>
+        
+        <!-- Dynamic Content Area (Right) -->
+        <ContentControl Grid.Column="1" 
+                       Content="{Binding CurrentViewModel}" />
+        
+    </Grid>
+    
 </Window>
