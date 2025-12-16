@@ -41,9 +41,8 @@ namespace Project_Bac3.ViewModels
         private void Matchbutton()
         {
             PlayerViewModel w_exist = PlayerService.Instance.ExistPlayer(W_Player);
-            PlayerViewModel b_exist = PlayerService.Instance.ExistPlayer(W_Player);
+            PlayerViewModel b_exist = PlayerService.Instance.ExistPlayer(B_Player);
             PlayerService.Instance.GetPlayerList();
-            if(Draw_ == true){MatchService.Instance.NewMatch(w_exist, b_exist, plays, 0.5);}
             if( w_exist == null ){
                 W_error = "Player does not exist";
                 Console.WriteLine("1");
@@ -55,14 +54,14 @@ namespace Project_Bac3.ViewModels
             else
             {
                 if(Draw_ == true)
-                {MatchService.Instance.NewMatch(w_exist, b_exist, plays, 0.5);}
+                {MatchService.Instance.NewMatch(w_exist, b_exist, plays, false);}
                 else if (current_player == "white")
                 {
-                    MatchService.Instance.NewMatch(w_exist, b_exist, plays, 1);
+                    MatchService.Instance.NewMatch(w_exist, b_exist, plays, false);
                 }
                 else
                 {
-                    MatchService.Instance.NewMatch(b_exist, w_exist, plays, 0);
+                    MatchService.Instance.NewMatch(b_exist, w_exist, plays, false);
                 }
                 Console.WriteLine("3");
                 W_Player = B_Player = W_error = B_error = string.Empty;

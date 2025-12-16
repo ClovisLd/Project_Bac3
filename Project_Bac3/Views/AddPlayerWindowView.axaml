@@ -10,6 +10,7 @@
         
         <TextBlock Text="Name:" />
         <TextBox Text="{Binding Name}" Watermark="Enter name..." />
+        <TextBlock Text="{Binding Error_}" Foreground="DarkRed"/>
         
         <TextBlock Text="Age:" />
         <NumericUpDown Value="{Binding Age}"

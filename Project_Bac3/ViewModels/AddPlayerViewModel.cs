@@ -13,26 +13,26 @@ namespace Project_Bac3.ViewModels
         [ObservableProperty]
         private string name = string.Empty;
 
-
         [ObservableProperty]
         private int age = 0; 
-
 
         [ObservableProperty]
         private string contact = string.Empty;
 
-
         [ObservableProperty]
         private string description = string.Empty;
 
+        [ObservableProperty]
+        private int eloRating = 400;
 
         [ObservableProperty]
-        private int eloRating = 1000;
-
+        private string error_ = string.Empty;
 
         [RelayCommand]
         private void AddPlayer()
         {
+
+            
             var player = new Player
             {
                 Name = Name,
@@ -42,14 +42,20 @@ namespace Project_Bac3.ViewModels
                 EloRating = EloRating
             };
             Console.WriteLine($"{Name}");
-            PlayerService.Instance.AddPlayer(player);
-            // TODO: Add player to list or save
-            // Clear form
-            Name = string.Empty;
-            Age = 0;
-            Contact = string.Empty;
-            Description = string.Empty;
-            EloRating = 400;
+            if (PlayerService.Instance.ExistPlayer(Name)!=null)
+            {
+                Error_ = "Ce joueur exist deja";
+            }
+            else
+            {
+                PlayerService.Instance.AddPlayer(new PlayerViewModel(player));
+
+                Name = string.Empty;
+                Age = 0;
+                Contact = string.Empty;
+                Description = string.Empty;
+                EloRating = 400;
+            }
         }
     }
 }

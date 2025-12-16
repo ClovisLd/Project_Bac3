@@ -43,14 +43,14 @@ namespace Project_Bac3.Services
             return Players;
         }
         // Simple method to add a player to the list
-        public void AddPlayer(Player player)
+        public void AddPlayer(PlayerViewModel player)
         {
             bool added = false;
             for(int i=0; i < Players.Count; i++)
             {   
-                if (player.EloRating > Int32.Parse(Players[i].EloRating))
+                if (player.EloRating > Players[i].EloRating)
                 {
-                    Players.Insert(i,new PlayerViewModel(player));
+                    Players.Insert(i, player);
                     added = true;
                     break;
                 }
@@ -58,7 +58,7 @@ namespace Project_Bac3.Services
 
             if (!added)
             {
-                Players.Add(new PlayerViewModel(player));
+                Players.Add(player);
             }
         }
 
@@ -66,7 +66,6 @@ namespace Project_Bac3.Services
         {
             Players.Remove(player);
         }
-
 
         public PlayerViewModel ExistPlayer(String playername)
         {
@@ -79,10 +78,5 @@ namespace Project_Bac3.Services
             }
             return null;
         }
-
-
-    
-
-        
     }
 }
