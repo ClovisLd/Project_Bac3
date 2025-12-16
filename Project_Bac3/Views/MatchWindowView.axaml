@@ -3,8 +3,64 @@
              xmlns:vm="using:Project_Bac3.ViewModels"
              x:Class="Project_Bac3.Views.MatchWindowView"
              x:DataType="vm:MatchWindowViewModel">
-    
-    <TextBlock Text="{Binding Test}" />
 
+
+    <StackPanel Margin="20" Spacing="20">
+        <TextBlock Text="Match" FontSize="20" FontWeight="Bold" />
+
+        <Grid ColumnDefinitions="*, 20, *">
+
+            <StackPanel Grid.Column="0" Spacing="10">
+                <TextBlock Text="White player" FontWeight="Bold"/>
+                
+                <TextBox Text="{Binding W_Player}" Watermark="Enter player name"/>
+                <TextBlock Text="{Binding W_error}" Foreground="DarkRed"/>
+                
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Spacing="10">
+                <TextBlock Text="Black player" FontWeight="Bold"/>
+                
+                <TextBox Text="{Binding B_Player}" Watermark="Enter player name"/>
+                <TextBlock Text="{Binding B_error}" Foreground="DarkRed"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <TextBox Watermark="Enter play eg. D4"
+                Text="{Binding Play}"
+                Foreground="{Binding Fg_color}"
+                CaretBrush="{Binding Fg_color}">
+            <TextBox.KeyBindings>
+                <KeyBinding Gesture="Enter" Command="{Binding PlaybuttonCommand}"/>
+            </TextBox.KeyBindings>
+            <TextBox.Styles>
+                <Style Selector="TextBox">
+                    <Setter Property="Background" Value="{Binding Bg_color}"/>
+                </Style>
+                <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="{Binding Bg_color}"/>
+                </Style>
+                <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                    <Setter Property="Background" Value="{Binding Bg_color}"/>
+                </Style>
+            </TextBox.Styles>
+        </TextBox>
+                
+        <Button Command="{Binding PlaybuttonCommand}" 
+                Content="Add play" 
+                Margin="0,20,0,0"/>
+        
+        <CheckBox IsChecked="{Binding Draw_}" 
+                Content="Draw" />
+
+        <Button Command="{Binding MatchbuttonCommand}" 
+                Content="Submit Match" 
+                HorizontalAlignment="Center" 
+                Margin="0,20,0,0"/>
+
+
+    </StackPanel>
     
 </UserControl>

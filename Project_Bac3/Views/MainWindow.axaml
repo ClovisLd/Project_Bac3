@@ -28,7 +28,7 @@
             Home
         </Button>
 
-        <Button Command="{Binding NavigateToAddPLayerCommand}"
+        <Button Command="{Binding NavigateToAddPlayerCommand}"
                 HorizontalAlignment="Center"
                 Margin="10"
                 Padding="20,10"

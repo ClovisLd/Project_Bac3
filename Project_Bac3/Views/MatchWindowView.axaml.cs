@@ -1,6 +1,5 @@
 using System;
 using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Project_Bac3.Views
 {

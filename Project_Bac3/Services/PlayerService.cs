@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Security.Cryptography.X509Certificates;
 using Project_Bac3.Models;
 using Project_Bac3.ViewModels;
 
@@ -36,6 +38,10 @@ namespace Project_Bac3.Services
             };
         }
 
+        public ObservableCollection<PlayerViewModel> GetPlayerList()
+        {
+            return Players;
+        }
         // Simple method to add a player to the list
         public void AddPlayer(Player player)
         {
@@ -55,6 +61,27 @@ namespace Project_Bac3.Services
                 Players.Add(new PlayerViewModel(player));
             }
         }
+
+        public void RemovePlayer(PlayerViewModel player)
+        {
+            Players.Remove(player);
+        }
+
+
+        public PlayerViewModel ExistPlayer(String playername)
+        {
+            foreach(var player in Players)
+            {
+                if (player.Name == playername)
+                {
+                    return player;
+                }
+            }
+            return null;
+        }
+
+
+    
 
         
     }

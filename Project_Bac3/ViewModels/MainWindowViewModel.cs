@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace Project_Bac3.ViewModels
@@ -21,7 +22,7 @@ namespace Project_Bac3.ViewModels
         }
 
         [RelayCommand]
-        private void NavigateToAddPLayer()
+        private void NavigateToAddPlayer()
         {
             CurrentViewModel = new AddPlayerWindowViewModel();
         }
@@ -30,6 +31,7 @@ namespace Project_Bac3.ViewModels
         private void NavigateToMatch()
         {
             CurrentViewModel = new MatchWindowViewModel();
+            Console.WriteLine("stalut les copains");
         }
         
         public string Greeting { get; } = "Welcome to Avalonia!";
