@@ -12,6 +12,7 @@ namespace Project_Bac3.ViewModels
         // Une propriété pour afficher le nom complet
         public string Name => $"{_player.Name}";
         public string Age => $"{_player.Age}";
+        public string Contact => $"{_player.Contact}";
         public string Description => $"{_player.Description}";
         public int EloRating => _player.EloRating;
 
@@ -20,12 +21,31 @@ namespace Project_Bac3.ViewModels
             _player = player;
         }
 
-        public void UpdateElo(int newRating)
+        public void UpdateName(string new_name)
         {
-            _player.EloRating = newRating;
-            
-            // CORRECTION: Use OnPropertyChanged()
+            _player.Name = new_name;
+            OnPropertyChanged(nameof(Name)); 
+        }
+        public void UpdateAge(int new_age)
+        {
+            _player.Age = new_age;
+            OnPropertyChanged(nameof(Age)); 
+        }
+        public void UpdateContact(string new_contact)
+        {
+            _player.Contact = new_contact;
+            OnPropertyChanged(nameof(Contact)); 
+        }
+        public void UpdateDescription(string new_description)
+        {
+            _player.Description = new_description;
+            OnPropertyChanged(nameof(Description)); 
+        }
+        public void UpdateElo(int new_rating)
+        {
+            _player.EloRating = new_rating;
             OnPropertyChanged(nameof(EloRating)); 
         }
+
     }
 }
