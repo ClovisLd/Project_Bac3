@@ -43,6 +43,14 @@
                 FontSize="16">
             Match
         </Button>
+
+        <Button Command="{Binding NavigateToCompetition}"
+                HorizontalAlignment="Center"
+                Margin="10"
+                Padding="20,10"
+                FontSize="16">
+            Competition
+        </Button>
         
     </StackPanel>
         

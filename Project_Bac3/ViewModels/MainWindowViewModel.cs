@@ -31,7 +31,12 @@ namespace Project_Bac3.ViewModels
         private void NavigateToMatch()
         {
             CurrentViewModel = new MatchWindowViewModel();
-            Console.WriteLine("stalut les copains");
+        }
+
+        [RelayCommand]
+        public void NavigateToCompetition()
+        {
+            CurrentViewModel = new CompetitionWindowViewModel();
         }
         
         public string Greeting { get; } = "Welcome to Avalonia!";

@@ -17,6 +17,9 @@
         <DataTemplate DataType="{x:Type vm:MatchWindowViewModel}">
             <views:MatchWindowView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CompetitionWindowViewModel}">
+            <views:CompetitionWindowView /> 
+        </DataTemplate>
     </Application.DataTemplates>
   
   
