@@ -23,14 +23,14 @@ namespace Project_Bac3.Services
         }
 
 
-        public ObservableCollection<Match> Matches { get; }
+        public ObservableCollection<MatchViewModel> Matches { get; }
 
 
 
         // Private constructor - can only be called once by Instance
         private MatchService()
         {
-            Matches = new ObservableCollection<Match>{};
+            Matches = new ObservableCollection<MatchViewModel>{};
         }
 
         public void NewMatch(PlayerViewModel player1, PlayerViewModel player2, List<String> Plays, bool draw_)
@@ -61,6 +61,8 @@ namespace Project_Bac3.Services
 
             PlayerService.Instance.AddPlayer(player1);
             PlayerService.Instance.AddPlayer(player2);
+
+            Matches.Add(new MatchViewModel(new Match{Winning_player=player1.Name, Loosing_player=player2.Name, Plays=Plays}));
 
         }
     }

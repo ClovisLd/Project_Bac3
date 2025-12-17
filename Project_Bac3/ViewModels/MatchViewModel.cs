@@ -6,7 +6,7 @@ namespace Project_Bac3.ViewModels
 {
     // Il est bon que les ViewModels héritent de ViewModelBase
     // si vous avez besoin de notifier des changements de propriétés.
-    public class Match: ViewModelBase
+    public class MatchViewModel: ViewModelBase
     {
         private readonly Match match;
 
@@ -15,9 +15,9 @@ namespace Project_Bac3.ViewModels
         public string Loosing_player => $"{match.Loosing_player}";
         
 
-        public Match(Match Match)
+        public MatchViewModel(Match Match)
         {
-            match= Match;
+            match = Match;
         }
     }
 }

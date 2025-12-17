@@ -41,6 +41,11 @@
                                            Foreground="White" 
                                            FontWeight="Bold"
                                            VerticalAlignment="Center"/>
+
+                                <TextBlock Text="{Binding EloRating}" 
+                                           Foreground="White" 
+                                           VerticalAlignment="Center"/>
+                                
                                 
                                 <Button Grid.Column="1" 
                                         Content="Edit" 
