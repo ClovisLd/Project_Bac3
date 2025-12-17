@@ -2,13 +2,179 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:Project_Bac3.ViewModels"
              x:Class="Project_Bac3.Views.CompetitionWindowView"
-             x:DataType="vm:CompetitionWindowViewModel">
-    
-    
-    <StackPanel Margin="20" Spacing="10">
-        
-        <TextBlock Text="{Binding Hello}"/>
+             x:DataType="vm:CompetitionWindowViewModel"
+             x:Name="Root">
 
-        
-    </StackPanel>
+    <Grid Margin="20">
+        <!-- =========================== -->
+        <!-- 1. THE LIST (Normal View)   -->
+        <!-- =========================== -->
+        <StackPanel IsVisible="{Binding !IsEditing}" Spacing="10">
+
+            <Grid ColumnDefinitions="*, Auto">
+                <TextBlock Grid.Column="0" 
+                        Text="Competitions" 
+                        FontSize="24" 
+                        FontWeight="Bold" 
+                        Foreground="White" 
+                        VerticalAlignment="Center"/>
+
+                <!-- NEW BUTTON (Right) -->
+                <Button Grid.Column="1"
+                        Content="Create Competition"
+                        Command="{Binding StartCreateCommand}"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Padding="15,8"
+                        CornerRadius="5"/>
+            </Grid>
+            <!-- Search Bar -->
+            <TextBox Text="{Binding SearchText}" 
+                    Watermark="Search competition..."
+                    Background="Black"
+                    Foreground="White"
+                    BorderBrush="#444"
+                    CornerRadius="3">
+                <TextBox.KeyBindings>
+                    <KeyBinding Gesture="Enter" Command="{Binding UpdateFilterCommand}"/>
+                </TextBox.KeyBindings>
+            </TextBox>
+
+            <!-- Competition List -->
+            <ListBox ItemsSource="{Binding FilteredCompetitions}" Height="500" Background="Transparent">
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Style>
+                </ListBox.Styles>
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#333333" CornerRadius="3" Padding="15" Margin="0,5">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <StackPanel Spacing="5">
+                                    <TextBlock Text="{Binding Name}" 
+                                            Foreground="White" 
+                                            FontWeight="Bold"
+                                            FontSize="16"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                        <TextBlock Text="Organizer:" Foreground="#888" FontSize="12"/>
+                                        <TextBlock Text="{Binding Organisator}" Foreground="#CCC" FontSize="12"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                        <TextBlock Text="Players:" Foreground="#888" FontSize="12"/>
+                                        <TextBlock Text="{Binding Player_list.Count}" Foreground="#CCC" FontSize="12"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <!-- Edit Button -->
+                                <Button Grid.Column="1" 
+                                        Content="Edit" 
+                                        Background="#555"
+                                        Foreground="White"
+                                        VerticalAlignment="Center"
+                                        Command="{Binding #Root.DataContext.StartEditCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <!-- =========================== -->
+        <!-- 2. THE EDIT POPUP           -->
+        <!-- =========================== -->
+        <Border IsVisible="{Binding IsEditing}" 
+                Background="Black" 
+                BorderBrush="#666"
+                BorderThickness="1"
+                CornerRadius="5" 
+                Padding="30"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top"
+                Width="500"
+                BoxShadow="0 0 50 10 Black">
+            
+            <StackPanel Spacing="15">
+                <TextBlock Text="Edit Competition" 
+                        FontSize="24" 
+                        FontWeight="Bold" 
+                        Foreground="White"
+                        Margin="0,0,0,10"/>
+
+                <!-- NAME -->
+                <StackPanel>
+                    <TextBlock Text="Competition Name:" Foreground="White" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding EditName}" Background="Black" Foreground="White" BorderBrush="#555"/>
+                </StackPanel>
+
+                <!-- ORGANIZER -->
+                <StackPanel>
+                    <TextBlock Text="Organizer:" Foreground="White" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding EditOrganisator}" Background="Black" Foreground="White" BorderBrush="#555"/>
+                </StackPanel>
+
+                <Separator Margin="0,10" Background="#444" Height="1"/>
+
+                <!-- ADD PLAYER SECTION -->
+                <StackPanel>
+                    <TextBlock Text="Add Player to Competition:" Foreground="White" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <!-- Dropdown to choose player -->
+                        <ComboBox Grid.Column="0" 
+                                ItemsSource="{Binding AllPlayers}" 
+                                SelectedItem="{Binding PlayerToAdd}"
+                                PlaceholderText="Select a player..."
+                                HorizontalAlignment="Stretch"
+                                Background="Black"
+                                Foreground="White"
+                                BorderBrush="#555">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" Foreground="White"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        
+                        <!-- Add Button -->
+                        <Button Grid.Column="1" 
+                                Content="Add" 
+                                Margin="10,0,0,0"
+                                Background="#2C3E50"
+                                Foreground="White"
+                                Command="{Binding AddPlayerToCompetitionCommand}"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- CURRENT PLAYERS LIST (Read Only View) -->
+                <TextBlock Text="Current Participants:" Foreground="#AAA" Margin="0,10,0,0"/>
+                <ListBox ItemsSource="{Binding SelectedCompetition.Player_list}"
+                        Height="100" 
+                        Background="#111" 
+                        BorderBrush="#333" 
+                        BorderThickness="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" Foreground="#DDD" Margin="5"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- SAVE / CANCEL BUTTONS -->
+                <StackPanel Orientation="Horizontal" Spacing="15" Margin="0,20,0,0">
+                    <Button Command="{Binding SaveEditCommand}" 
+                            Content="Save Changes"
+                            Padding="20,10"
+                            BorderThickness="1"/>
+                    
+                    <Button Command="{Binding CancelEditCommand}" 
+                            Content="Cancel" 
+                            Padding="20,10"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
 </UserControl>

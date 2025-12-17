@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Project_Bac3.Models; // N'oubliez pas le using pour accéder au modèle
+using System.Collections.ObjectModel;
+
 
 namespace Project_Bac3.ViewModels
 {
@@ -11,12 +13,28 @@ namespace Project_Bac3.ViewModels
         private readonly Competition competition;
 
         public string Name => $"{competition.Name}";
-        public List<PlayerViewModel> Player_list => competition.Player_list;
         public string Organisator => $"{competition.Organisator}";
+        public List<PlayerViewModel> Player_list => new List<PlayerViewModel>();
 
         public CompetitionViewModel(Competition Competition)
         {
-            competition = Competition;
+            competition = Competition;  
+        }
+
+        public void UpdateName(string new_name)
+        {
+            competition.Name = new_name;
+            OnPropertyChanged(nameof(Name)); 
+        }
+        public void UpdatePlayer_List(PlayerViewModel new_player)
+        {
+            competition.Player_list.Add(new_player);
+            OnPropertyChanged(nameof(Player_list)); 
+        }
+        public void UpdateOrganisator(string new_organisator)
+        {
+            competition.Organisator = new_organisator;
+            OnPropertyChanged(nameof(Organisator)); 
         }
     }
 }
