@@ -37,9 +37,9 @@ Le diagramme suivant illustre le processus de création d'un match, de la mise �
 ## 5. Diagramme d’activité
 
 Ce diagramme décrit le cycle de vie de l'application, incluant le chargement des données au démarrage et la sauvegarde lors de la fermeture.
-
+<div align="center">
 <img width="589" height="1044" alt="image" src="https://github.com/user-attachments/assets/c5e80033-026a-4799-ac58-d14a50a5e285" />
-
+</div>
 
 ## 6. Justification des qualités d’adaptabilité
 
