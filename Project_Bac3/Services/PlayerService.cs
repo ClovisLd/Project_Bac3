@@ -13,14 +13,14 @@ namespace Project_Bac3.Services
     public class PlayerService
     {
         // Singleton pattern - ensures only ONE instance exists in your app
-        private static PlayerService? _instance;
+        private static PlayerService? instance;
         public static PlayerService Instance
         {
             get
             {
-                if (_instance == null)
-                    _instance = new PlayerService();
-                return _instance;
+                if (instance == null)
+                    instance = new PlayerService();
+                return instance;
             }
         }
 

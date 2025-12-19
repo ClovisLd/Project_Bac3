@@ -11,14 +11,14 @@ namespace Project_Bac3.Services
     public class MatchService
     {
         
-        private static MatchService? _instance;
+        private static MatchService? instance;
         public static MatchService Instance
         {
             get
             {
-                if (_instance == null)
-                    _instance = new MatchService();
-                return _instance;
+                if (instance == null)
+                    instance = new MatchService();
+                return instance;
             }
         }
 

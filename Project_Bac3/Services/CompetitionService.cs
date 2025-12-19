@@ -9,14 +9,14 @@ namespace Project_Bac3.Services
     public class CompetitionService
     {
         // --- Singleton Pattern ---
-        private static CompetitionService? _instance;
+        private static CompetitionService? instance;
         public static CompetitionService Instance
         {
             get
             {
-                if (_instance == null)
-                    _instance = new CompetitionService();
-                return _instance;
+                if (instance == null)
+                    instance = new CompetitionService();
+                return instance;
             }
         }
 
