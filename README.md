@@ -1,72 +1,64 @@
 # Rapport de Projet : Gestionnaire de Compétitions - Project_Bac3
 
-**Auteur :** [Votre Nom]  
-**Cours :** [Nom du Cours / Professeur]  
-**Date :** 19 Décembre 2025
-
 ---
-
 
 ## 1. Introduction et Mise en contexte
 
 Le projet **Project_Bac3** est une application de bureau développée en C# avec le framework **Avalonia**, utilisant l'architecture **MVVM (Model-View-ViewModel)**.
 
-L'objectif principal est de fournir un outil de gestion pour des fédérations sportives ou de jeux compétitifs. L'application permet de gérer une liste de joueurs, de suivre leurs statistiques, d'organiser des compétitions et d'enregistrer des matchs. Dans un monde où l'e-sport et les compétitions locales sont en pleine expansion, cet outil vise à simplifier l'administration des tournois tout en garantissant un classement équitable des participants.
+L'objectif est de fournir un outil robuste pour les organisateurs de compétitions. L'application permet de gérer des membres, d'organiser des tournois et d'enregistrer des résultats en temps réel. Grâce à une séparation nette entre la logique métier et l'interface graphique, l'outil offre une base stable pour l'administration de n'importe quel sport ou jeu compétitif.
 
-## 2. Fonctionnalité supplémentaire choisie
+## 2. Fonctionnalités supplémentaires choisies
 
-Pour enrichir l'expérience utilisateur et la pertinence technique du projet, j'ai choisi d'implémenter :  
-**Le Système de Classement Elo Dynamique avec Persistance de Données JSON.**
+Pour enrichir le projet, j'ai implémenté trois fonctionnalités majeures :  
 
-- **Système Elo :** Contrairement à un simple compteur de victoires/défaites, le système Elo calcule la probabilité de victoire entre deux joueurs. À la fin d'un match, le gain ou la perte de points est ajusté en fonction du niveau relatif de l'adversaire (algorithme mathématique implémenté dans le `MatchService`).
-- **Persistance JSON :** L'application sauvegarde automatiquement l'état complet (joueurs, matchs, compétitions) dans un fichier JSON local à la fermeture, et le restaure au démarrage, garantissant ainsi qu'aucune donnée n'est perdue entre deux sessions.
+- **Le Système de Classement Elo Dynamique :** L'application intègre un algorithme (implémenté dans `MatchService`) qui calcule l'évolution du niveau des joueurs en fonction du résultat des matchs et de la difficulté de l'adversaire (facteur K=64).
+- **Persistance de Données JSON :** Un service de persistance automatique sauvegarde l'intégralité du système (Joueurs, Matchs, Compétitions) dans un fichier JSON à la fermeture et restaure l'état au démarrage.
+- **Navigation ViewModel-First :** L'interface utilise un `MainWindowViewModel` qui orchestre l'affichage dynamique des différentes vues (`Home`, `AddPlayer`, `Match`, `Competition`) sans multiplication de fenêtres système.
 
 ## 3. Diagramme de classes
 
-Ce diagramme présente la structure de nos modèles (`Player`, `Match`, `Competition`), nos ViewModels et la couche de services.
+Ce diagramme présente la structure statique de l'application. On y observe la séparation entre les **Models** (données pures), les **ViewModels** (logique d'interface) et les **Services** (logique métier et persistance).
 
-<img width="1330" height="1070" alt="new" src="https://github.com/user-attachments/assets/ba007ec0-907e-4ee9-8d42-f705e23005ec" />
-On y voit la séparation claire entre les données (Models) et la logique de présentation (ViewModels).
+<div align="center">
+  <img width="90%" alt="Diagramme de Classes" src="https://github.com/user-attachments/assets/ba007ec0-907e-4ee9-8d42-f705e23005ec" />
+  <br><em>Figure 1 : Architecture globale, héritage Person/Player et Services Singletons</em>
+</div>
 
 ## 4. Diagramme de séquences
 
-Le diagramme suivant illustre le processus de création d'un match, de la mise à jour des scores Elo jusqu'à l'enregistrement dans la liste globale.
+Ce diagramme illustre la dynamique de la **navigation**. Il montre comment le `MainWindowViewModel` intercepte une commande utilisateur pour instancier un nouveau sous-ViewModel et mettre à jour l'affichage via le mécanisme de *Data Binding*.
 
-<img width="1093" height="543" alt="image" src="https://github.com/user-attachments/assets/28226b97-0f2c-4ba1-9dde-45f340f7774a" />
+<div align="center">
+  <img width="80%" alt="Diagramme de Séquences" src="https://github.com/user-attachments/assets/28226b97-0f2c-4ba1-9dde-45f340f7774a" />
+  <br><em>Figure 2 : Flux de navigation ViewModel-First (PlantUML)</em>
+</div>
 
 ## 5. Diagramme d’activité
 
-Ce diagramme décrit le cycle de vie de l'application, incluant le chargement des données au démarrage et la sauvegarde lors de la fermeture.
+Ce diagramme décrit le comportement logique de l'application, incluant le chargement initial, la gestion des erreurs de saisie (ex: joueur inexistant) et la sauvegarde finale lors de l'événement `Exit`.
+
 <div align="center">
-<img width="589" height="1044" alt="image" src="https://github.com/user-attachments/assets/c5e80033-026a-4799-ac58-d14a50a5e285" />
+  <img width="50%" alt="Diagramme d'Activité" src="https://github.com/user-attachments/assets/c5e80033-026a-4799-ac58-d14a50a5e285" />
+  <br><em>Figure 3 : Cycle de vie des données et validation des matchs</em>
 </div>
 
 ## 6. Justification des qualités d’adaptabilité
 
-Le projet a été conçu pour être facilement adaptable à n'importe quelle fédération (échecs, football, tennis de table, jeux vidéo) pour les raisons suivantes :
+Le projet a été conçu pour être facilement adaptable à n'importe quelle fédération pour les raisons suivantes :
 
-1.  **Abstraction du "Joueur" :** Le modèle `Player` est générique. Il contient des informations de base (Nom, Age, Contact) et un score Elo qui est universel pour tout sport compétitif.
-2.  **Modularité des Services :** Le système de calcul des points est centralisé dans le `MatchService`. Si une fédération utilise un système de points différent (ex: 3 pts victoire / 1 pt nul), il suffit de modifier une seule méthode sans impacter l'interface utilisateur.
-3.  **Indépendance de la Plateforme :** Grâce à l'utilisation d'`AppDomain.CurrentDomain.BaseDirectory` pour la gestion des fichiers, l'application et sa base de données portable fonctionnent identiquement sur Windows, macOS et Linux.
+1.  **Héritage et Extension :** Grâce à l'utilisation de la classe de base `Person`, l'application peut être étendue pour gérer des arbitres ou des coachs sans modifier la structure existante.
+2.  **Généricité du Match :** La capture des coups joués (`plays`) sous forme de liste de chaînes de caractères permet d'utiliser l'application pour des jeux très différents (échecs, sports de combat, etc.).
+3.  **Localisation des données :** Le stockage JSON est relatif au répertoire d'exécution (`BaseDirectory`), rendant l'application totalement portable entre Windows et macOS sans modification de code.
 
 ## 7. Principes SOLID utilisés
 
-L'architecture du projet s'appuie sur plusieurs principes SOLID pour garantir un code propre et maintenable :
+### A. Single Responsibility Principle (SRP)
+Chaque classe possède une responsabilité unique. Par exemple :
+- **`PersistenceService`** : Gère uniquement la sérialisation JSON.
+- **`MatchWindowViewModel`** : Gère uniquement la capture des entrées utilisateur et les erreurs d'interface.
+- **`MatchService`** : Contient l'unique logique mathématique du calcul Elo.
+**Justification :** Cette séparation permet de modifier l'algorithme de calcul sans jamais risquer de casser l'interface utilisateur.
 
-### A. Single Responsibility Principle (SRP - Principe de Responsabilité Unique)
-
-Chaque classe possède une responsabilité unique et bien définie :
-
-- **`PersistenceService`** : S'occupe exclusivement de transformer les objets en JSON et de gérer les fichiers sur le disque. Il ne connaît rien aux règles du score Elo.
-- **`PlayerService`** : Gère uniquement la collection de joueurs (ajout, suppression, recherche).
-- **Justification :** Cette séparation facilite le débogage. Si un problème survient lors de la sauvegarde, on sait exactement que le problème se situe dans le service de persistance et non dans la logique métier.
-
-### B. Dependency Inversion Principle (DIP - Principe d'Inversion de Dépendance)
-
-Bien que nous utilisions le pattern Singleton pour simplifier l'accès, les **ViewModels** ne manipulent jamais directement les données brutes des **Models**. Ils passent par une couche intermédiaire (les **Services**).
-
-- **Justification :** Cela permet de découpler l'interface utilisateur de la logique de stockage. Si demain nous décidons d'utiliser une base de données SQL au lieu d'un fichier JSON, seul le `PersistenceService` devra être modifié. Le reste de l'application (UI et ViewModels) restera inchangé.
-
-## 8. Conclusion
-
-Ce projet m'a permis de mettre en pratique les concepts avancés de la programmation orientée objet et de l'architecture logicielle moderne. L'implémentation du pattern MVVM couplée à une gestion de services Singletons offre une base robuste pour une application évolutive. L'ajout du système Elo et de la persistance automatique transforme ce qui aurait pu être une simple liste de noms en un véritable outil de gestion compétitive prêt à l'emploi.
+### B. Open/Closed Principle (OCP)
+Le modèle est "ouvert à l'extension mais f
