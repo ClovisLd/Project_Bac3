@@ -26,7 +26,7 @@ Pour enrichir l'expérience utilisateur et la pertinence technique du projet, j'
 Ce diagramme présente la structure de nos modèles (`Player`, `Match`, `Competition`), nos ViewModels et la couche de services.
 
 <img width="1330" height="1070" alt="new" src="https://github.com/user-attachments/assets/ba007ec0-907e-4ee9-8d42-f705e23005ec" />
-> _Note : On y voit la séparation claire entre les données (Models) et la logique de présentation (ViewModels)._
+On y voit la séparation claire entre les données (Models) et la logique de présentation (ViewModels).
 
 ## 4. Diagramme de séquences
 
