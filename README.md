@@ -6,6 +6,7 @@
 
 ---
 
+
 ## 1. Introduction et Mise en contexte
 
 Le projet **Project_Bac3** est une application de bureau développée en C# avec le framework **Avalonia**, utilisant l'architecture **MVVM (Model-View-ViewModel)**.
@@ -24,13 +25,14 @@ Pour enrichir l'expérience utilisateur et la pertinence technique du projet, j'
 
 Ce diagramme présente la structure de nos modèles (`Player`, `Match`, `Competition`), nos ViewModels et la couche de services.
 
-> ![Diagramme de Classes](chemin/vers/votre/image_classe.png) > _Note : On y voit la séparation claire entre les données (Models) et la logique de présentation (ViewModels)._
+<img width="1330" height="1070" alt="new" src="https://github.com/user-attachments/assets/ba007ec0-907e-4ee9-8d42-f705e23005ec" />
+> _Note : On y voit la séparation claire entre les données (Models) et la logique de présentation (ViewModels)._
 
 ## 4. Diagramme de séquences
 
 Le diagramme suivant illustre le processus de création d'un match, de la mise à jour des scores Elo jusqu'à l'enregistrement dans la liste globale.
 
-> ![Diagramme de Séquences](chemin/vers/votre/image_sequence.png)
+<img width="1093" height="543" alt="image" src="https://github.com/user-attachments/assets/28226b97-0f2c-4ba1-9dde-45f340f7774a" />
 
 ## 5. Diagramme d’activité
 
