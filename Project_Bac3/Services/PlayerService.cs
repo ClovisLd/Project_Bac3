@@ -34,7 +34,7 @@ namespace Project_Bac3.Services
         {
             Players = new ObservableCollection<PlayerViewModel>
             {
-                new PlayerViewModel(new Player{Name="zefze", Age=43, Contact="zefzef", Description="zefzef", EloRating=444})
+                new PlayerViewModel(new Player())
             };
         }
 

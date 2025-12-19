@@ -35,18 +35,26 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <!-- Dark Grey Card -->
-                        <Border Background="#333333" CornerRadius="3" Padding="15" Margin="0,5">
+                        <Border Background="#333333" CornerRadius="3" Padding="10" Margin="0,5">
                             <Grid ColumnDefinitions="*, Auto">
-                                <TextBlock Text="{Binding Name}" 
-                                           Foreground="White" 
-                                           FontWeight="Bold"
-                                           VerticalAlignment="Center"/>
+                                <!-- CHANGE 1: Wrap Name and Score in a StackPanel -->
+                                <StackPanel Grid.Column="0" 
+                                            Orientation="Horizontal" 
+                                            Spacing="15" 
+                                            VerticalAlignment="Center">
+                                    
+                                    <TextBlock Text="{Binding Name}" 
+                                            Foreground="White" 
+                                            FontWeight="Bold"
+                                            FontSize="16"/>
 
-                                <TextBlock Text="{Binding EloRating}" 
-                                           Foreground="White" 
-                                           VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding EloRating}" 
+                                            Foreground="#AAAAAA" 
+                                            VerticalAlignment="Center"/>
+                                </StackPanel>
                                 
                                 
+                                <!-- CHANGE 2: The Button stays in Column 1 -->
                                 <Button Grid.Column="1" 
                                         Content="Edit" 
                                         Background="#555"

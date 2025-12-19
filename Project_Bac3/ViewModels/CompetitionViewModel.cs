@@ -25,6 +25,7 @@ namespace Project_Bac3.ViewModels
             Player_list = new ObservableCollection<PlayerViewModel>(competition.Player_list);
             Match_list = new ObservableCollection<MatchViewModel>(Competition.Match_list);
         }
+        public Competition Model => competition;
 
         public void UpdateName(string new_name)
         {

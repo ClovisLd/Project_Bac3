@@ -41,5 +41,17 @@ namespace Project_Bac3.Services
                 Competitions.Remove(competition);
             }
         }
+
+        public CompetitionViewModel ExistCompetition(string competionname)
+        {
+            foreach(var competition in Competitions)
+            {
+                if(competition.Name == competionname)
+                {
+                    return competition;
+                }
+            }
+            return null;
+        }
     }
 }

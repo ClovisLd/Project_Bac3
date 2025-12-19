@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Project_Bac3.Models;
 using Project_Bac3.Services;
+using Project_Bac3.ViewModels;
 
 namespace Project_Bac3.ViewModels
 {
@@ -27,6 +28,7 @@ namespace Project_Bac3.ViewModels
         // 3. SEARCH & STATE
         [ObservableProperty] private string searchText = "";
         [ObservableProperty] private bool isEditing = false;
+        [ObservableProperty] private bool isAddingMatch = false;
         [ObservableProperty] private CompetitionViewModel selectedCompetition;
 
         // 4. EDIT BUFFERS (Temporary variables for the textboxes)
@@ -35,6 +37,7 @@ namespace Project_Bac3.ViewModels
         
         // The player selected in the ComboBox to be added
         [ObservableProperty] private PlayerViewModel? playerToAdd;
+
 
         public CompetitionWindowViewModel()
         {

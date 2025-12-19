@@ -26,6 +26,8 @@
 
             </StackPanel>
 
+
+
         </Grid>
 
         <TextBox Watermark="Enter play eg. D4"
@@ -47,6 +49,9 @@
                 </Style>
             </TextBox.Styles>
         </TextBox>
+
+        <TextBox Text="{Binding Comp_name}" Watermark="Enter competition name...(Optional)"/>
+        <TextBlock Text="{Binding CompetitionError}" Foreground="Red" FontSize="12"/>
                 
         <Button Command="{Binding PlaybuttonCommand}" 
                 Content="Add play" 

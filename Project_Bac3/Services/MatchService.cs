@@ -33,7 +33,7 @@ namespace Project_Bac3.Services
             Matches = new ObservableCollection<MatchViewModel>{};
         }
 
-        public void NewMatch(PlayerViewModel player1, PlayerViewModel player2, List<String> Plays, bool draw_)
+        public void NewMatch(PlayerViewModel player1, PlayerViewModel player2, List<String> Plays, bool draw_, CompetitionViewModel comp)
         {
             Console.WriteLine($"{player1.Name} et {player2.Name}");
             PlayerService.Instance.RemovePlayer(player1);
@@ -62,7 +62,14 @@ namespace Project_Bac3.Services
             PlayerService.Instance.AddPlayer(player1);
             PlayerService.Instance.AddPlayer(player2);
 
-            Matches.Add(new MatchViewModel(new Match{Winning_player=player1.Name, Loosing_player=player2.Name, Plays=Plays}));
+            if(comp == null)
+            {
+                Matches.Add(new MatchViewModel(new Match{Winning_player=player1.Name, Loosing_player=player2.Name, Plays=Plays}));
+            }
+            else
+            {
+                comp.UpdateMatch_List(new MatchViewModel(new Match{Winning_player=player1.Name, Loosing_player=player2.Name, Plays=Plays}));
+            }
 
         }
     }
