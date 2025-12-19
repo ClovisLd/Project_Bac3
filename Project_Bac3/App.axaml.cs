@@ -6,6 +6,8 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Project_Bac3.ViewModels;
 using Project_Bac3.Views;
+using Project_Bac3.Services;
+using System;
 
 namespace Project_Bac3;
 
@@ -23,10 +25,18 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
+            PersistenceService.Load();
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainWindowViewModel(),
             };
+
+            desktop.Exit += (sender, e) =>
+            {
+                PersistenceService.Save();
+                Console.WriteLine("zerstrd");
+            };
+
         }
 
         base.OnFrameworkInitializationCompleted();

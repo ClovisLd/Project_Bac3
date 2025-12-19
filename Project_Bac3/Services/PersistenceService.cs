@@ -19,9 +19,7 @@ namespace Project_Bac3.Services
     public static class PersistenceService
     {
         // Path: %AppData%/Local/app_data.json
-        private static string FilePath => Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
-            "project_bac3_data.json");
+        private static string FilePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"project_bac3_data.json");
 
         public static void Save()
         {
