@@ -59,6 +59,14 @@ Chaque classe possède une responsabilité unique. Par exemple :
 - **`MatchWindowViewModel`** : Gère uniquement la capture des entrées utilisateur et les erreurs d'interface.
 - **`MatchService`** : Contient l'unique logique mathématique du calcul Elo.
 **Justification :** Cette séparation permet de modifier l'algorithme de calcul sans jamais risquer de casser l'interface utilisateur.
-
+  
 ### B. Open/Closed Principle (OCP)
-Le modèle est "ouvert à l'extension mais f
+Le modèle est "ouvert à l'extension mais fermé à la modification". L'introduction de la classe `Person` dont dérive `Player` illustre ce principe. On peut ajouter de nouveaux types de participants sans modifier le code de `PlayerService`.
+
+### C. Dependency Inversion Principle (DIP)
+Les ViewModels ne gèrent pas le stockage des données. Ils dépendent des Services (Singletons) qui exposent des `ObservableCollection`. 
+**Justification :** Cela permet une synchronisation instantanée : un joueur ajouté dans une vue apparaît immédiatement dans les listes de recherche des autres vues car elles partagent toutes la même source de données centralisée.
+
+## 8. Conclusion
+
+Ce projet m'a permis de consolider ma compréhension de l'architecture logicielle moderne. L'utilisation rigoureuse du pattern MVVM et des principes SOLID a permis de transformer un simple gestionnaire de listes en une application professionnelle capable de gérer la complexité d'un système de classement Elo. La mise en place de la persistance JSON assure une continuité d'utilisation indispensable pour un outil de gestion de fédération réel.
